@@ -49,7 +49,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <!--    <PreferenceCategory
         android:key="spectrum_category"
         android:title="@string/spectrum_category_title">
 
@@ -61,7 +61,7 @@
             android:entries="@array/spectrum_profiles"
             android:entryValues="@array/spectrum_values" />
 
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
     <!--<PreferenceCategory
         android:key="graphics"

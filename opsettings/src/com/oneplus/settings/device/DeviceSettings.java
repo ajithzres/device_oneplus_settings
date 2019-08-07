@@ -46,13 +46,10 @@ public class DeviceSettings extends PreferenceFragment
     private static final String TAG = "DeviceSettings";
 
     private static final String KEY_HAPTIC_FEEDBACK = "touchscreen_gesture_haptic_feedback";
-    private static final String SPECTRUM_KEY = "spectrum";
-    private static final String SPECTRUM_CATEGORY_KEY = "spectrum_category";
-    private static final String SPECTRUM_SYSTEM_PROPERTY = "persist.spectrum.profile";
+   
 
     private SwitchPreference mHapticFeedback;
-    private ListPreference mSpectrum;
-    private PreferenceCategory mSpectrumCategory;
+   
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -64,16 +61,6 @@ public class DeviceSettings extends PreferenceFragment
         mHapticFeedback.setOnPreferenceChangeListener(this);
         mHapticFeedback.setChecked(Settings.System.getInt(getActivity().getContentResolver(), KEY_HAPTIC_FEEDBACK, 1) != 0);
 
-        mSpectrum = (ListPreference) findPreference(SPECTRUM_KEY);
-        if( mSpectrum != null ) {
-            mSpectrum.setValue(SystemProperties.get(SPECTRUM_SYSTEM_PROPERTY, "0"));
-            mSpectrum.setOnPreferenceChangeListener(this);
-        }
-
-        mSpectrumCategory = (PreferenceCategory) findPreference(SPECTRUM_CATEGORY_KEY);
-        if (!getResources().getBoolean(R.bool.device_supports_spectrum)) {
-            getPreferenceScreen().removePreference(mSpectrumCategory);
-        }
 
         if (Constants.isNotificationSliderSupported()) {
             initNotificationSliderPreference();
@@ -109,11 +96,7 @@ public class DeviceSettings extends PreferenceFragment
             return true;
         }
 
-        if (SPECTRUM_KEY.equals(key)) {
-            strvalue = (String) newValue;
-            SystemProperties.set(SPECTRUM_SYSTEM_PROPERTY, strvalue);
-            return true;
-        }
+      
 
         switch (key) {
             case Constants.NOTIF_SLIDER_USAGE_KEY:
